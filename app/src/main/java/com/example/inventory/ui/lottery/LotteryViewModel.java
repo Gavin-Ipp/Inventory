@@ -11,6 +11,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.inventory.BuildConfig;
 import com.example.inventory.GoogleSignInActivity;
 import com.example.inventory.utils.GoogleSheetsHelper;
 
@@ -46,8 +47,7 @@ public class LotteryViewModel extends AndroidViewModel {
         // Initialize Google Sheets Helper
         googleSheetsHelper = new GoogleSheetsHelper(application);
         
-        // Set your spreadsheet ID here
-        googleSheetsHelper.setSpreadsheetId("1d3cGGrE6oDFJIY_xJ7nCLIsPMclfDE8w64RL9-i7jEU");
+        googleSheetsHelper.setSpreadsheetId(BuildConfig.SPREADSHEET_ID);
         
         // Check authentication status
         checkAuthenticationStatus();
