@@ -1,114 +1,90 @@
-# Inventory Manager - Lottery Ticket Scanner
+# Inventory Manager
 
-An Android app for managing inventory with a focus on lottery ticket scanning and tracking.
+An Android inventory management system that uses barcode scanning to track inventory items and report data to Google Sheets.
 
 ## Features
 
-- **QR Code Scanner**: Scan lottery ticket QR codes using the device camera
-- **Code List Management**: View and manage scanned codes in a clean list interface
-- **Google Sheets Integration**: Submit scanned codes to Google Sheets for tracking
-- **Modern UI**: Material Design 3 interface with intuitive navigation
+- **Barcode Scanning**: Scan inventory item barcodes using the device camera
+- **Inventory Tracking**: View and manage scanned items in a clean list interface
+- **Duplicate & Conflict Detection**: Automatically flags duplicate scans and item conflicts
+- **Google Sheets Reporting**: Submit inventory data to Google Sheets via webhook for reporting
+- **Shift Reports**: Generate open/close shift reports with drawer counts
+- **Modern UI**: Material Design 3 interface with bottom navigation
 
-## Setup Instructions
+## Setup
 
-### 1. Prerequisites
+### Prerequisites
 
 - Android Studio (latest version)
 - Android device or emulator with camera support
-- Google Cloud Project (for Google Sheets integration)
+- A deployed Google Apps Script webhook (see `webhook_handler.gs`)
 
-### 2. Project Setup
+### Configuration
 
-1. Clone or download this project
-2. Open the project in Android Studio
-3. Sync the project with Gradle files
-4. Build the project to ensure all dependencies are resolved
+1. Clone the repo and open it in Android Studio
+2. Copy `secrets.properties.example` to `secrets.properties`
+3. Fill in your webhook URL in `secrets.properties`:
+   ```
+   WEBHOOK_URL=https://script.google.com/macros/s/.../exec
+   ```
+4. Sync Gradle and build
 
-### 3. Permissions
+### Permissions
 
-The app requires the following permissions:
-- **Camera**: For QR code scanning
-- **Internet**: For Google Sheets integration
-- **Network State**: For checking connectivity
-
-These permissions are already declared in the AndroidManifest.xml.
-
-### 4. Building and Running
-
-1. Connect your Android device or start an emulator
-2. Click "Run" in Android Studio
-3. Select your target device
-4. The app will install and launch
+Declared in `AndroidManifest.xml`:
+- **Camera** — barcode scanning
+- **Internet** — Google Sheets webhook submission
 
 ## Usage
 
-### Scanning Lottery Tickets
+### Scanning Inventory
 
-1. Navigate to the "Lottery" tab in the bottom navigation
-2. Tap "Scan QR Code" button
-3. Grant camera permission if prompted
-4. Point the camera at a lottery ticket QR code
-5. The scanned code will appear in the list below
+1. Navigate to the **Inventory** tab in the bottom navigation
+2. Point the device camera at an item barcode — codes are captured automatically
+3. Scanned items appear in a numbered list with parsed item details
+4. Use **Clear Selected** (checkbox each item) or **Clear All** to remove entries
 
-### Managing Codes
+### Submitting a Report
 
-- **View Codes**: All scanned codes are displayed in a numbered list
-- **Clear All**: Tap "Clear All" to remove all scanned codes
-- **Submit to Sheets**: Tap "Submit to Google Sheets" to send codes to your spreadsheet
+1. Review the scanned list; resolve any duplicate or conflict warnings
+2. Tap **Save** to confirm the inventory count
+3. Tap **Submit Report** to push the data to Google Sheets
 
-### Navigation
+### Shift Reports
 
-The app uses bottom navigation with four tabs:
-- **Home**: Main dashboard
-- **Dashboard**: Analytics and overview
-- **Lottery**: QR code scanner and lottery ticket management
-- **Notifications**: App notifications
+Navigate to the **Home** tab to fill in open/close shift details and drawer counts before submitting.
 
-## Technical Details
+## Architecture
 
-### Architecture
-- **MVVM Pattern**: Uses ViewModel and LiveData for data management
-- **Navigation Component**: For fragment navigation
-- **View Binding**: For safe view access
-- **RecyclerView**: For displaying the list of scanned codes
+- **MVVM** — `ViewModel` + `LiveData` as the single source of truth; fragments only observe and dispatch actions
+- **Navigation Component** — single-activity, fragment-based navigation
+- **View Binding** — type-safe view access
+- **Webhook submission** — plain `HttpURLConnection` POST to a Google Apps Script web app; no Google API client library required
 
-### Dependencies
-- **ZXing**: For QR code scanning
-- **Google Sheets API**: For spreadsheet integration
-- **Material Design**: For modern UI components
-- **AndroidX**: For core Android functionality
+## File Structure
 
-### File Structure
 ```
 app/src/main/java/com/example/inventory/
 ├── MainActivity.java
 ├── ui/
-│   ├── lottery/
+│   ├── lottery/          # Inventory scanning screen
 │   │   ├── LotteryFragment.java
 │   │   ├── LotteryViewModel.java
 │   │   └── LotteryAdapter.java
-│   ├── home/
+│   ├── home/             # Shift report screen
 │   ├── dashboard/
-│   └── notifications/
+│   ├── notifications/
+│   └── shared/
+│       └── ReportViewModel.java
 └── utils/
-    └── GoogleSheetsHelper.java
+    ├── GoogleSheetsHelper.java   # Webhook submission
+    └── LotteryTicketParser.java  # Barcode parsing
 ```
 
 ## Troubleshooting
 
-### Common Issues
+**Camera permission denied** — Settings → Apps → Inventory Manager → Permissions → enable Camera.
 
-1. **Camera Permission Denied**
-   - Go to Settings > Apps > Inventory Manager > Permissions
-   - Enable Camera permission
+**Submission fails** — confirm your Google Apps Script is deployed as a Web App with access set to *Anyone*, and that the URL in `secrets.properties` matches the current deployment.
 
-2. **Google Sheets Integration Not Working**
-   - Verify your Google Cloud Project setup
-   - Check that the service account has access to the spreadsheet
-   - Ensure the spreadsheet ID is correct
-
-3. **Build Errors**
-   - Clean and rebuild the project
-   - Sync project with Gradle files
-   - Check that all dependencies are properly resolved
-
+**Build errors** — run *File → Sync Project with Gradle Files*, then *Build → Clean Project*.
