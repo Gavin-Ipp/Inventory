@@ -397,35 +397,26 @@ public class LotteryFragment extends Fragment {
 
     private void setupClickListeners() {
         binding.buttonClearSelected.setOnClickListener(v -> {
-            if (binding == null) return; // Prevent crashes if fragment is destroyed
-            
+            if (binding == null) return;
+
             if (selectedPositions.isEmpty()) {
                 Toast.makeText(getContext(), "No codes selected", Toast.LENGTH_SHORT).show();
                 return;
             }
-            
-            // Remove selected codes
-            List<String> codesToRemove = new ArrayList<>();
-            for (Integer position : selectedPositions) {
-                if (position < lotteryCodes.size()) {
-                    codesToRemove.add(lotteryCodes.get(position));
-                }
+
+            List<String> current = new ArrayList<>(lotteryCodes);
+            List<Integer> sorted = new ArrayList<>(selectedPositions);
+            java.util.Collections.sort(sorted, java.util.Collections.reverseOrder());
+            for (int pos : sorted) {
+                if (pos < current.size()) current.remove(pos);
             }
-            
-            // Remove from the main list
-            lotteryCodes.removeAll(codesToRemove);
-            
-            // Update the ViewModel
-            lotteryViewModel.updateCodes(lotteryCodes);
-            
-            // Clear selection
+
+            lotteryViewModel.updateCodes(current);
+
             selectedPositions.clear();
             selectionMode = false;
-            
-            // Update UI
-            updateScrollViewCodes(lotteryCodes);
             updateClearSelectedButtonState();
-            
+
             Toast.makeText(getContext(), "Selected codes cleared", Toast.LENGTH_SHORT).show();
         });
 
@@ -605,33 +596,8 @@ public class LotteryFragment extends Fragment {
         lastScanTime = currentTime;
     }
 
-    /**
-     * Clean up a code by removing all whitespace, newlines, and formatting characters
-     */
     private String cleanCode(String code) {
-        if (code == null) {
-            return "";
-        }
-        
-        // Remove all whitespace characters including:
-        // - Spaces, tabs, newlines, carriage returns
-        // - Non-breaking spaces, zero-width spaces
-        // - Other Unicode whitespace characters
-        String cleaned = code.replaceAll("\\s+", "");
-        
-        // Remove common scanner delimiters and formatting
-        cleaned = cleaned.replaceAll("[\\n\\r\\t]", "");
-        
-        // Remove any other control characters
-        cleaned = cleaned.replaceAll("[\\x00-\\x1F\\x7F]", "");
-        
-        // Remove leading and trailing whitespace
-        cleaned = cleaned.replaceAll("^\\s+|\\s+$", "");
-        
-        // Keep only alphanumeric characters (lottery codes can be alphanumeric)
-        cleaned = cleaned.replaceAll("[^A-Za-z0-9]", "");
-        
-        return cleaned;
+        return LotteryTicketParser.cleanCode(code);
     }
 
     private void updateSubmitButtonState() {
@@ -706,9 +672,6 @@ public class LotteryFragment extends Fragment {
                     updateClearSelectedButtonState();
                     
                     Toast.makeText(getContext(), "Lottery codes saved successfully! Next: Submit Report", Toast.LENGTH_LONG).show();
-                    
-                    // Provide subtle guidance without forcing navigation
-                    showNextStepGuidance("Submit Report");
                     dialog.dismiss();
                 })
                 .setNegativeButton("Cancel", (dialog, which) -> {
@@ -777,27 +740,11 @@ public class LotteryFragment extends Fragment {
                 .setTitle("Game ID Conflict Detected")
                 .setMessage(message)
                 .setPositiveButton("Double Game (Green)", (dialog, which) -> {
-                    // Append "1" to the most recently scanned code to make it different
-                    String latestCode = gameIDToLatestCode.get(gameID);
-                    if (latestCode != null) {
-                        String modifiedCode = latestCode + "1";
-                        
-                        // Find and replace the latest code in the list
-                        int index = lotteryCodes.lastIndexOf(latestCode);
-                        if (index != -1) {
-                            lotteryCodes.set(index, modifiedCode);
-                            
-                            // Mark this game ID as resolved and set status
-                            resolvedGameIDs.add(gameID);
-                            gameIDStatus.put(gameID, "double");
-                            gameIDToLatestCode.remove(gameID);
-                            
-                            // Update the ViewModel with the modified list
-                            lotteryViewModel.updateCodes(lotteryCodes);
-                            
-                            Toast.makeText(getContext(), "Modified latest code to make it unique", Toast.LENGTH_SHORT).show();
-                        }
-                    }
+                    resolvedGameIDs.add(gameID);
+                    gameIDStatus.put(gameID, "double");
+                    gameIDToLatestCode.remove(gameID);
+                    updateScrollViewCodes(lotteryCodes);
+                    Toast.makeText(getContext(), "Marked as double game", Toast.LENGTH_SHORT).show();
                 })
                 .setNegativeButton("New Game (Yellow)", (dialog, which) -> {
                     // Mark this game ID as resolved and set status
@@ -816,18 +763,4 @@ public class LotteryFragment extends Fragment {
                 .show();
     }
     
-    private void showNextStepGuidance(String nextStep) {
-        try {
-            android.util.Log.d("LotteryFragment", "Showing guidance for next step: " + nextStep);
-            
-            // Show a subtle guidance message
-            if (getActivity() != null) {
-                // You can customize this to show a more prominent guidance UI
-                // For now, we'll just log it and the Toast message already shows the guidance
-                android.util.Log.d("LotteryFragment", "Next step guidance: " + nextStep);
-            }
-        } catch (Exception e) {
-            android.util.Log.e("LotteryFragment", "Error showing guidance: " + e.getMessage(), e);
-        }
-    }
 }
