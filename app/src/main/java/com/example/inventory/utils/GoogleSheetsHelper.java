@@ -14,6 +14,8 @@ import com.google.api.services.sheets.v4.model.ValueRange;
 import com.google.auth.http.HttpCredentialsAdapter;
 import com.google.auth.oauth2.GoogleCredentials;
 
+import com.example.inventory.utils.LotteryTicketParser;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -47,8 +49,8 @@ public class GoogleSheetsHelper {
     private ExecutorService executorService;
     
     public GoogleSheetsHelper(Context context) {
-        this.context = context;
-        this.preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        this.context = context.getApplicationContext();
+        this.preferences = this.context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         this.executorService = Executors.newSingleThreadExecutor();
         setupSheetsService();
     }
@@ -421,27 +423,8 @@ public class GoogleSheetsHelper {
         }
     }
 
-    /**
-     * Clean up a code by removing all whitespace, newlines, and formatting characters
-     */
     private String cleanCode(String code) {
-        if (code == null) {
-            return "";
-        }
-        
-        // Remove all whitespace characters
-        String cleaned = code.replaceAll("\\s+", "");
-        
-        // Remove common scanner delimiters and formatting
-        cleaned = cleaned.replaceAll("[\\n\\r\\t]", "");
-        
-        // Remove any other control characters
-        cleaned = cleaned.replaceAll("[\\x00-\\x1F\\x7F]", "");
-        
-        // Remove leading and trailing whitespace
-        cleaned = cleaned.replaceAll("^\\s+|\\s+$", "");
-        
-        return cleaned;
+        return LotteryTicketParser.cleanCode(code);
     }
     
     /**

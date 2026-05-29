@@ -57,8 +57,8 @@ public class LotteryTicketParser {
             }
 
             try {
-                // Parse according to the specified format:
-                // gameID (0-2), bookNumber (4-9), ticketNumber (10-12), ticketPrice (13-14)
+                // Format: gameID[0-2] + separator[3] + bookNumber[4-9] + ticketNumber[10-12] + ticketPrice[13-14]
+                // Index 3 is a separator character (e.g. space or dash) and is intentionally skipped.
                 gameID = code.substring(0, 3).trim();
                 bookNumber = code.substring(4, 10).trim();
                 ticketNumber = code.substring(10, 13).trim();
@@ -139,5 +139,13 @@ public class LotteryTicketParser {
      */
     public static TicketInfo parseTicketCode(String code) {
         return new TicketInfo(code);
+    }
+
+    /**
+     * Strip whitespace, control characters, and non-alphanumeric characters from a code.
+     */
+    public static String cleanCode(String code) {
+        if (code == null) return "";
+        return code.replaceAll("[^A-Za-z0-9]", "");
     }
 }
