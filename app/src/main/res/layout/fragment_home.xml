@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:fillViewport="true"
+    android:scrollbars="vertical"
+    android:fadeScrollbars="false"
+    android:layout_marginBottom="80dp"
+    tools:context=".ui.home.HomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Shift Report"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Date and Open/Close Toggle Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginEnd="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Date *"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+
+                <EditText
+                    android:id="@+id/editTextDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="MM/DD/YYYY"
+                    android:inputType="date"
+                    android:background="@android:drawable/edit_text"
+                    android:padding="12dp"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Shift Type"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/textShiftType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Open"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:background="@android:drawable/edit_text"
+                    android:padding="12dp"
+                    android:textColor="@android:color/holo_blue_dark" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Name Field -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Employee Name *"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/editTextEmployeeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your name"
+            android:inputType="textPersonName"
+            android:background="@android:drawable/edit_text"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Safe Table -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Safe"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <TableLayout
+            android:id="@+id/tableSafe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:layout_marginBottom="24dp"
+            android:background="@android:drawable/edit_text">
+
+            <!-- Header Row -->
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/darker_gray">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Safe:"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Open"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Close"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="-1"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </TableRow>
+
+            <!-- Data Rows (9 rows) with labels -->
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Pennies" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/safe_open_1" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <TextView android:id="@+id/safe_close_1" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <Button android:id="@+id/button_decrement_1" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Nickels" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/safe_open_2" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <TextView android:id="@+id/safe_close_2" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <Button android:id="@+id/button_decrement_2" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Dimes" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/safe_open_3" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <TextView android:id="@+id/safe_close_3" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <Button android:id="@+id/button_decrement_3" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Quarters" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/safe_open_4" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <TextView android:id="@+id/safe_close_4" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <Button android:id="@+id/button_decrement_4" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="$1 Bills" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/safe_open_5" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <TextView android:id="@+id/safe_close_5" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <Button android:id="@+id/button_decrement_5" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="$5 Bills" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/safe_open_6" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <TextView android:id="@+id/safe_close_6" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <Button android:id="@+id/button_decrement_6" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Pennies (xtra)" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/safe_open_7" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <TextView android:id="@+id/safe_close_7" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <Button android:id="@+id/button_decrement_7" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="$300" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/safe_open_8" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <TextView android:id="@+id/safe_close_8" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <Button android:id="@+id/button_decrement_8" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Xtra $5/10" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/safe_open_9" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <TextView android:id="@+id/safe_close_9" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <Button android:id="@+id/button_decrement_9" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+        </TableLayout>
+
+        <!-- Safe Amount Owed and Reset Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/buttonResetSafe"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Reset Safe to Default"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/textAmountOwed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Amount Owed: $0.00"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@android:drawable/edit_text"
+                android:padding="12dp"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <!-- Cash Drawer Table -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cash Drawer"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <TableLayout
+            android:id="@+id/tableCashDrawer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:layout_marginBottom="24dp"
+            android:background="@android:drawable/edit_text">
+
+            <!-- Header Row -->
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/darker_gray">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Denomination"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Open"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Close"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </TableRow>
+
+            <!-- Data Rows (8 rows) with labels -->
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Pennies" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/drawer_open_1" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <EditText android:id="@+id/drawer_close_1" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:inputType="number" android:gravity="center" android:padding="8dp" android:hint="0" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Nickels" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/drawer_open_2" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <EditText android:id="@+id/drawer_close_2" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:inputType="number" android:gravity="center" android:padding="8dp" android:hint="0" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Dimes" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/drawer_open_3" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <EditText android:id="@+id/drawer_close_3" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:inputType="number" android:gravity="center" android:padding="8dp" android:hint="0" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Quarters" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/drawer_open_4" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <EditText android:id="@+id/drawer_close_4" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:inputType="number" android:gravity="center" android:padding="8dp" android:hint="0" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="$1 Bills" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/drawer_open_5" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <EditText android:id="@+id/drawer_close_5" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:inputType="number" android:gravity="center" android:padding="8dp" android:hint="0" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="$5 Bills" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/drawer_open_6" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <EditText android:id="@+id/drawer_close_6" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:inputType="number" android:gravity="center" android:padding="8dp" android:hint="0" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="$10 Bills" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/drawer_open_7" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <EditText android:id="@+id/drawer_close_7" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:inputType="number" android:gravity="center" android:padding="8dp" android:hint="0" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="$20/ Rolled Coins" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/drawer_open_8" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <EditText android:id="@+id/drawer_close_8" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:inputType="number" android:gravity="center" android:padding="8dp" android:hint="0" />
+            </TableRow>
+        </TableLayout>
+
+        <!-- Cash Drawer Total and Set Open Drawer Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/buttonSetOpenDrawer"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Set Open Drawer"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/textDrawerTotal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Total: $0.00"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@android:drawable/edit_text"
+                android:layout_margin="5dp" />
+        </LinearLayout>
+
+        <!-- Safe Drops Table -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Safe Drops"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <TableLayout
+            android:id="@+id/tableSafeDrops"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:layout_marginBottom="16dp"
+            android:background="@android:drawable/edit_text">
+
+            <!-- Header Row -->
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/darker_gray">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Envelope Number"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="$$$"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </TableRow>
+
+            <!-- Initial Data Rows (2 rows) -->
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <Spinner android:id="@+id/drop_envelope_1" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" />
+                <EditText android:id="@+id/drop_amount_1" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:inputType="numberDecimal" android:gravity="center" android:padding="8dp" android:hint="0.00" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <Spinner android:id="@+id/drop_envelope_2" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" />
+                <EditText android:id="@+id/drop_amount_2" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:inputType="numberDecimal" android:gravity="center" android:padding="8dp" android:hint="0.00" />
+            </TableRow>
+        </TableLayout>
+
+        <!-- Add Row Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="24dp">
+
+            <Button
+                android:id="@+id/buttonAddNormalRow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Add Normal Row"
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:id="@+id/buttonAddBankRow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Add Bank Row"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/buttonSubmitReport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save Shift Report"
+            android:textSize="16sp"
+            android:padding="16dp" />
+
+    </LinearLayout>
+</ScrollView>

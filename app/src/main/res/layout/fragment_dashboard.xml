@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:fillViewport="true"
+    android:scrollbars="vertical"
+    android:fadeScrollbars="false"
+    android:layout_marginBottom="80dp"
+    tools:context=".ui.dashboard.DashboardFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tobacco Inventory"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Tobacco Table -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tobacco Products"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <TableLayout
+            android:id="@+id/tableTobacco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:layout_marginBottom="24dp"
+            android:background="@android:drawable/edit_text">
+
+            <!-- Header Row -->
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/darker_gray">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Product:"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Open"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Close"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="-1"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </TableRow>
+
+            <!-- Data Rows (11 rows) with tobacco product labels -->
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Shelf 1" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/tobacco_open_1" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <EditText android:id="@+id/tobacco_close_1" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" android:inputType="number" />
+                <Button android:id="@+id/button_decrement_tobacco_1" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Shelf 2" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/tobacco_open_2" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <EditText android:id="@+id/tobacco_close_2" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" android:inputType="number" />
+                <Button android:id="@+id/button_decrement_tobacco_2" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Shelf 3" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/tobacco_open_3" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <EditText android:id="@+id/tobacco_close_3" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" android:inputType="number" />
+                <Button android:id="@+id/button_decrement_tobacco_3" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Shelf 4" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/tobacco_open_4" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <EditText android:id="@+id/tobacco_close_4" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" android:inputType="number" />
+                <Button android:id="@+id/button_decrement_tobacco_4" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Zig Zag" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/tobacco_open_5" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <EditText android:id="@+id/tobacco_close_5" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" android:inputType="number" />
+                <Button android:id="@+id/button_decrement_tobacco_5" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Cigar" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/tobacco_open_6" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <EditText android:id="@+id/tobacco_close_6" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" android:inputType="number" />
+                <Button android:id="@+id/button_decrement_tobacco_6" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Zyn" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/tobacco_open_7" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <EditText android:id="@+id/tobacco_close_7" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" android:inputType="number" />
+                <Button android:id="@+id/button_decrement_tobacco_7" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Dip/On!" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/tobacco_open_8" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <EditText android:id="@+id/tobacco_close_8" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" android:inputType="number" />
+                <Button android:id="@+id/button_decrement_tobacco_8" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Cig Cartons" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/tobacco_open_9" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <EditText android:id="@+id/tobacco_close_9" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" android:inputType="number" />
+                <Button android:id="@+id/button_decrement_tobacco_9" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Zyn Rolls" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/tobacco_open_10" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <EditText android:id="@+id/tobacco_close_10" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" android:inputType="number" />
+                <Button android:id="@+id/button_decrement_tobacco_10" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Unopened Cigars" android:gravity="center" android:padding="8dp" android:textStyle="bold" />
+                <TextView android:id="@+id/tobacco_open_11" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" />
+                <EditText android:id="@+id/tobacco_close_11" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:padding="8dp" android:textStyle="bold" android:background="@android:color/white" android:inputType="number" />
+                <Button android:id="@+id/button_decrement_tobacco_11" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:text="-" android:textSize="16sp" android:padding="4dp" />
+            </TableRow>
+        </TableLayout>
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/buttonSubmitTobacco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save Inventory"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+</ScrollView>
