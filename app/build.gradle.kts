@@ -1,5 +1,12 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
+}
+
+val secretsFile = rootProject.file("secrets.properties")
+val secrets = Properties().apply {
+    if (secretsFile.exists()) load(secretsFile.inputStream())
 }
 
 android {
@@ -14,6 +21,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "SPREADSHEET_ID", "\"${secrets["SPREADSHEET_ID"] ?: ""}\"")
+        buildConfigField("String", "WEBHOOK_URL", "\"${secrets["WEBHOOK_URL"] ?: ""}\"")
+        buildConfigField("String", "GOOGLE_OAUTH_CLIENT_ID", "\"${secrets["GOOGLE_OAUTH_CLIENT_ID"] ?: ""}\"")
     }
 
     buildTypes {
@@ -31,6 +42,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
     packaging {

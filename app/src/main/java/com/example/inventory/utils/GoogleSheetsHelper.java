@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.inventory.BuildConfig;
+
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
@@ -32,14 +34,13 @@ public class GoogleSheetsHelper {
     
     private static final String TAG = "GoogleSheetsHelper";
     private static final String APPLICATION_NAME = "Inventory Manager";
-    private static final String SPREADSHEET_ID = "1d3cGGrE6oDFJIY_xJ7nCLIsPMclfDE8w64RL9-i7jEU"; // Replace with your actual spreadsheet ID
-    private static final String RANGE = "A:A"; // Column A for codes (uses first sheet by default)
+    private static final String SPREADSHEET_ID = BuildConfig.SPREADSHEET_ID;
+    private static final String RANGE = "A:A";
     private static final String PREF_NAME = "GoogleSheetsPrefs";
     private static final String KEY_SPREADSHEET_ID = "spreadsheet_id";
     private static final String KEY_ACCESS_TOKEN = "access_token";
-    
-    // Google Apps Script webhook URL
-    private static final String WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxsSis56yTAiPqQqjayYOePnzRkjuBYu6AEgfZy2tLWCrDTxH-MuncPczAe2qEitfmD/exec";
+
+    private static final String WEBHOOK_URL = BuildConfig.WEBHOOK_URL;
     
     private Sheets sheetsService;
     private Context context;

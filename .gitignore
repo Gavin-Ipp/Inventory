@@ -17,3 +17,4 @@ local.properties
 # Google Sheets credentials (security)
 app/src/main/assets/client_secrets.json
 app/src/main/assets/service-account-credentials.json
+secrets.properties
