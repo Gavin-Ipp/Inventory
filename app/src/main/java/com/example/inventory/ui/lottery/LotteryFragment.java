@@ -1,22 +1,17 @@
 package com.example.inventory.ui.lottery;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.CheckBox; // Added import for CheckBox
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -25,7 +20,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.inventory.databinding.FragmentLotteryBinding;
 import com.example.inventory.ui.shared.ReportViewModel;
 import com.example.inventory.utils.LotteryTicketParser;
-import com.example.inventory.utils.GoogleSheetsHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,21 +47,6 @@ public class LotteryFragment extends Fragment {
     private static final long SCAN_DELAY = 1000; // 1 second delay between scans
     private long lastScanTime = 0; // Track last scan time
     
-    private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == Activity.RESULT_OK) {
-                    // Sign-in was successful, try submitting again
-                    List<String> codes = lotteryViewModel.getLotteryCodes().getValue();
-                    if (codes != null && !codes.isEmpty()) {
-                        lotteryViewModel.submitToGoogleSheets(codes);
-                    }
-                } else {
-                    Toast.makeText(getContext(), "Sign-in was cancelled or failed", Toast.LENGTH_SHORT).show();
-                }
-            }
-    );
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         lotteryViewModel = new ViewModelProvider(this).get(LotteryViewModel.class);
@@ -356,15 +335,6 @@ public class LotteryFragment extends Fragment {
                 case IDLE:
                     binding.buttonSubmit.setEnabled(true);
                     break;
-            }
-        });
-        
-        lotteryViewModel.getNeedsSignIn().observe(getViewLifecycleOwner(), needsSignIn -> {
-            if (needsSignIn) {
-                // Show sign-in prompt
-                Toast.makeText(getContext(), "Please sign in to Google to submit codes", Toast.LENGTH_LONG).show();
-                // Launch sign-in activity
-                signInLauncher.launch(lotteryViewModel.getSignInIntent());
             }
         });
         
